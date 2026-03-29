@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pic - A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="imgViewer" onclick="this.style.display='none'">
+        <div id="viewerContent"></div>
+    </div>
+
+    <div id="landingPage">
+        <div class="nav-wrapper" id="mainNav">
+            <nav class="nav-bar">
+                <div class="logo" onclick="location.reload()">Pic - A</div>
+                <div class="nav-links">
+                    <a href="#" onclick="location.reload()">Home</a>
+                    <a href="#features">About Us</a>
+                    <a href="#footer-info">Contacts</a>
+                    <button class="btn-outline" style="padding: 10px 20px; font-size: 0.8rem;" onclick="showAuth('login')">Login</button>
+                </div>
+            </nav>
+        </div>
+        
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Capture Every<br>Single Moment.</h1>
+                <p>Every moment lasts forever when it becomes a memory</p>
+                <div class="cta-group">
+                    <button class="btn-dark" style="background: white; color: black;" onclick="showAuth('signup')">Create Account</button>
+                </div>
+            </div>
+        </header>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title"> About Us </h2>
+                <div class="features-grid">
+                    <div class="f-card">
+                        <span style="font-size: 3rem;">📸</span>
+                        <h3>Unlimited Storage</h3>
+                        <p>Store many photos as you want.</p>
+                    </div>
+                    <div class="f-card">
+                        <span style="font-size: 3rem;">🔒</span>
+                        <h3>Secure Privacy</h3>
+                        <p>Your memory is your memory, we keep it like that.</p>
+                    </div>
+                    <div class="f-card">
+                        <span style="font-size: 3rem;">⚡</span>
+                        <h3>Easy Access</h3>
+                        <p>Fast uploads any device is applicable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer-info">
+            <div class="container">
+                <h2 class="section-title" style="color: white; margin-bottom: 30px;"> Capture every moments</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">❮</button>
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide"><img src="https://images.pexels.com/photos/34761746/pexels-photo-34761746.jpeg" alt="1"></div>
+                        <div class="carousel-slide"><img src="https://images.pexels.com/photos/28561170/pexels-photo-28561170.jpeg" alt="2"></div>
+                        <div class="carousel-slide"><img src="https://images.pexels.com/photos/19333753/pexels-photo-19333753.jpeg" alt="3"></div>
+                        <div class="carousel-slide"><img src="https://images.pexels.com/photos/34278923/pexels-photo-34278923.jpeg" alt="4"></div>
+                        <div class="carousel-slide"><img src="https://images.pexels.com/photos/34266025/pexels-photo-34266025.jpeg" alt="5"></div>
+                    </div>
+                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">❯</button>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <h3>Contacts</h3>
+                    <p>Email: angelitolascuna34@gmail.com</p>
+                    <p style="opacity: 0.6; margin-top: 10px;">&copy; 2026 Pic - A. Keep Your Memories Here!.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="authSection" class="auth-container hidden">
+        <div id="signupForm" class="auth-card hidden">
+            <h2 style="margin-bottom: 20px;">Join Pic - A</h2>
+            <input type="text" id="regUser" placeholder="Username">
+            <input type="email" id="regEmail" placeholder="Email Address">
+            <select id="regGender">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <input type="password" id="regPass" placeholder="Password">
+            <button class="btn-solid" onclick="register()">Create Account</button>
+            <p style="margin-top:20px;">Already a member? <a href="#" onclick="showAuth('login')">Login</a></p>
+            <p style="margin-top:10px;"><a href="#" onclick="showAuth('landing')">Back to Home</a></p>
+        </div>
+
+        <div id="loginForm" class="auth-card hidden">
+            <h2 style="margin-bottom: 20px;">Welcome Back!</h2>
+            <input type="text" id="loginUser" placeholder="Username">
+            <input type="password" id="loginPass" placeholder="Password">
+            <button class="btn-solid" onclick="login()">Enter Pic - A</button>
+            <p style="margin-top:20px;">New here? <a href="#" onclick="showAuth('signup')">Sign Up</a></p>
+            <p style="margin-top:10px;"><a href="#" onclick="showAuth('landing')">Back to Home</a></p>
+        </div>
+    </div>
+
+    <div id="mainApp" class="container hidden">
+        <nav class="nav-bar" style="position: sticky; top: 0; background: #f8f9fa; z-index: 100; padding: 20px 0;">
+            <div class="logo" style="color: #1a1a1a;">Pic - A</div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="goToGallery()" style="background:none; border: 1px solid #ddd; color: #1a1a1a; padding: 10px; cursor: pointer;">🖼️ My Gallery</button>
+                <button onclick="toggleTrash()" style="background:none; border: 1px solid #ddd; color:#1a1a1a; padding: 10px; cursor: pointer;">🗑️ Trash (<span id="trashCount">0</span>)</button>
+                <button onclick="location.reload()" style="background:none; border: 1px solid #ddd; color:#1a1a1a; padding: 10px; cursor: pointer;">Logout</button>
+            </div>
+        </nav>
+        
+        <div style="background: white; padding: 60px; border-radius: 8px; text-align: center; margin: 40px 0; border: 2px dashed #ddd;">
+            <div onclick="document.getElementById('fileInput').click()" style="cursor: pointer;">
+                <p style="font-size: 1.2rem; font-weight: 600;">Click to Upload Photos or Videos</p>
+                <input type="file" id="fileInput" multiple accept="image/*,video/*" hidden onchange="handleFiles(this.files)">
+            </div>
+        </div>
+        
+        <h3 id="galleryTitle" style="margin-top: 20px;">All Uploads</h3>
+        <div id="gallery" class="gallery"></div>
+        
+        <div id="trashSection" class="hidden">
+            <h3 style="margin-top: 40px; border-top: 2px solid #ddd; padding-top: 20px;">Recycle Bin</h3>
+            <div id="trashGallery" class="gallery"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
